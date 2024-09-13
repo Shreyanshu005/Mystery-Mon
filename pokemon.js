@@ -1,4 +1,4 @@
-const pokemonCount = 10;
+const pokemonCount = 1025;
 var pokedex = {};
 var id = Math.floor((Math.random() * pokemonCount) + 1);
 var naam;
@@ -136,7 +136,7 @@ inputField.addEventListener('keydown', function(event) {
             const imgElement = document.getElementById('pokemon-image');
             imgElement.style.display = 'block'; // Ensure the image is displayed
             imgElement.classList.add('brightened');
-            document.getElementById('correct').innerText = 'Correct! The Pokémon is ' + naam;
+            document.getElementById('correct').innerText = 'You nailed it ! The Pokémon is ' + naam;
             document.getElementById('who').style.display = 'none';
             document.querySelector('.boxImg').style.marginBottom = '70px';
             document.querySelector('.link').style.display = 'flex';
@@ -158,7 +158,7 @@ inputField.addEventListener('keydown', function(event) {
             document.querySelector('.progress-bar-container').style.display = 'none'; // Hide progress bar
             document.querySelector('.reveal').style.display = 'none';
         } else {
-            alert('Incorrect guess. Try again!');
+            document.getElementById('correct').innerText = 'Oops! Try Again';
         }
     }
 });
