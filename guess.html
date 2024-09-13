@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeGuess</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+           
+            /* background: url(a186a8aff83506c70b0b307e3fb062c8.png); */
+            background-size: cover;
+          
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* height: 100vh; */
+            padding-top: 50px;
+
+        }
+        @font-face {
+    font-family: 'pokemon_solidnormal';
+    src: url('pokemon_solid-webfont.woff2') format('woff2'),
+         url('pokemon_solid-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'pokemon_hollownormal';
+    src: url('pokemon_hollow-webfont.woff2') format('woff2'),
+         url('pokemon_hollow-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+        .result {
+
+            align-items: center;
+            display: flex;
+            width: 50vw;
+            flex-direction: column;
+            justify-content: center;
+
+        }
+
+        img {
+            width: 400px;
+
+            cursor: pointer;
+            object-fit: cover;
+            filter: brightness(100);
+        }
+
+        .brightened {
+            filter: brightness(1);
+            /* Brightened state */
+        }
+
+        .result input {
+        
+            background: linear-gradient(to bottom right,#008cff,#e100ff);
+            color: white;
+            width: 300px;
+            height: 50px;
+            font-size: 20px;
+            text-align: center;
+            margin-top: 20px;
+            border: none;
+            border: 1px solid white;
+            border-radius: 1000px;
+            background-color: black;
+            /* box-shadow: 0 0 21px #03e9f4; */
+        }
+        .progress-bar-container {
+    width: 50%;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.progress-bar {
+    width: 0;
+    height: 10px;
+    background: linear-gradient(45deg, #008cff, #e100ff);
+    transition: width 0.1s linear;
+}
+
+   
+
+        .buttons {
+            display: flex;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .buttons .again , .buttons .reveal {
+            
+            position: relative;
+
+            width: 200px;
+            height: 55px;
+            font-size: 20px;
+            text-align: center;
+            margin-top: 20px;
+          border: none;
+            border-radius: 1000px;
+            color: white;
+            cursor: pointer;
+            background-color: black;
+            /* border: 1px solid #03e9f4; */
+            
+
+    
+            transition: transform 0.2s; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #161a20;
+            
+        }
+       
+        button::after{
+            
+content: '';
+position: absolute;
+height: 107%;
+width: 102%;
+border-radius: 1000px;
+background: red;
+background-image: linear-gradient(to bottom right,#008cff,#e100ff);
+z-index: -1;
+        }
+        .buttons .again:hover , .buttons .reveal:hover {
+            box-shadow: 0 0 20px #008cff, 0 0 20px #e100ff;
+        transform: scale(1.1);
+        z-index: 4;
+        }
+
+        
+
+        .info p {
+            font-size: 20px;
+            color: white;
+        }
+
+        #correct {
+            font-size: 40px;
+
+
+            font-family: "Play", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+
+        }
+
+        #pokemon-type {
+            font-size: 20px;
+            color: white;
+            font-family: "Play", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        button:hover {
+            background-color: grey;
+        }
+
+        .boxImg {
+            display: flex;
+            flex-direction: column;
+
+            text-align: center;
+            align-items: center;
+            height: 450px;
+            /* margin-bottom: 70px; */
+            
+
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        #pokemon-type,
+        #pokemon-description {
+            padding-left: 10px;
+            margin-top: 20px;
+            font-size: 20px;
+            color: white;
+            font-family: "Play", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+
+        }
+
+        .loading {
+            position: absolute;
+            /* margin-bottom: 300px; */
+        }
+
+        .loading img {
+            width: 100px;
+
+
+            filter: brightness(1);
+            animation: rotate 1s linear infinite;
+            /* Add animation */
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes animate {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+        #pokemon-image {
+            display: none;
+            /* animation: animate 2s alternate infinite; */
+        }
+
+        .timer {
+            
+            /* box-shadow: 0 0 21px #03e9f4; */
+            border-radius: 100px;
+            width: 75px;
+            font-family: "Play", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+            margin-bottom: 30px;
+            
+        }
+        .info {
+            
+    padding: 10px;
+    transition: border 0.3s ease;
+    position: relative; /* Ensure the pseudo-element is positioned relative to the .info element */
+}
+
+.info.has-content {
+    border-radius: 10px;
+    min-height: 200px;
+    max-height: fit-content;
+width: 400px;
+    /* width: fit-content; */
+    /* max-width: 400px; */
+    box-shadow: 0 0 21px grey;
+} 
+
+.info.has-content::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 10px; /* Adjust the border radius as needed */
+    background: linear-gradient(45deg, #008cff, #e100ff);
+    z-index: -1; /* Ensure the pseudo-element is behind the content */
+}
+.hidden {
+    display: none;
+}
+
+        
+        
+  
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes cursor {
+    50% { border-color: transparent; }
+}
+
+.up-down{
+    animation: animate 2s alternate infinite;
+}
+#link{
+    margin-bottom: 10px;
+    color: grey;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: "Play", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    margin-top: 20px;
+    /* border: 0.5px solid grey; */
+    border-radius: 10px;
+    padding: 10px;
+    /* box-shadow: 0 0 21px #03e9f4; */
+    transition: transform 0.2s; 
+}
+@media(max-width:900px){
+    body{
+        flex-direction: column;
+        padding-top: 120px;
+    }
+    .buttons{
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    #guessPokemon{
+        width: 200px;
+    }
+    .buttons .again{
+        margin-bottom: 30px;
+    }
+    #pokemon-image{
+        width: 300px;
+    }
+    .boxImg{
+        margin: 0;
+    }
+    .loading{
+        margin-bottom: 300px;
+    }
+}
+#guessPokemon::placeholder {
+    color: white; /* Change this to your desired color */
+}
+
+.who{
+    color: white;
+    font-family: 'pokemon_solidnormal';
+    font-size: 50px;
+}
+.link{
+    display: none;
+    background-color: white;
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    
+  
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px; /* Adjust the border radius as needed */
+    background: linear-gradient(45deg, #008cff, #e100ff);
+    box-shadow: 0 0 11px grey;
+    font-family: "Play", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+   
+}
+.link {
+    text-align: center;
+    margin-top: 20px;
+    
+    
+
+}
+.link a{
+
+    color: white;
+}
+
+
+ 
+    </style>
+</head>
+
+<body>
+
+    <div class="loading" id="loading-screen">
+
+        <img src="pngwing.com (1).png" alt="Loading...">
+    </div>
+
+    <div class="result">
+        <div class="timer" style="display: none;">
+            <p id="timer-clock" style="color: white; text-align: center; font-size: 24px;">10</p>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="boxImg">
+
+            <img id="pokemon-image" alt="Pokemon-image">
+            <p id="correct" style="color: white;"></p>
+
+        </div>
+        <div class="who" id="who">
+            <p>Who's That Pokémon?</p>
+        </div>
+        <div class="buttons">
+            <button class="reveal" disabled>
+                Reveal
+            </button>
+
+            <input type="text" placeholder="Guess here" id="guessPokemon" >
+
+            <button class="again">
+                Next!
+            </button>
+        </div>
+
+
+    </div>
+
+
+    </div>
+    </div>
+    <div class="pokedex">
+
+        <div class="info">
+            <p id="pokemon-type" ></p>
+            <p id="pokemon-description" ></p>
+           
+        </div>
+        <a href="" id="linkto">
+            <div class="link" style="color: white;">
+            Know More
+            </div>
+        </a>
+       
+        
+
+    </div>
+
+
+    <script src="pokemon.js"></script>
+
+</body>
+
+</html>
