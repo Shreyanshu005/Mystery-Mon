@@ -2,15 +2,13 @@ body{
     background-image: url(Untitled-1\ copy.png);
     background-color: black;
     background-repeat: no-repeat; 
-    background-size: 250vh; /* Optional: Ensure the background image covers the entire area */
+    background-size: 250vh; 
     background-position: center;
 
     padding: 0;
     margin: 0;
-    /* flex-wrap: wrap; */
     justify-content: center;
     align-items: center;
-    /* height: 100vh; */
     text-align: center;
    
 }
@@ -71,7 +69,6 @@ p{
     border-style: none;
     border: 1px solid red;
     padding: 15px 30px;
-    /* border-radius: 25px; */
     font-weight: 500;
     position: relative;
     transition: transform 0.7s; 
@@ -152,7 +149,6 @@ p{
       }
 @media(max-width: 700px){
     body{
-         /* background-size: 200vh; */
         
       display: flex;
       flex-direction: column;
@@ -199,12 +195,36 @@ p{
       }
   }
   @media(min-width: 700px)and (max-width: 1000px){
-    body{
-        /* background-size: 250vh; */
-    }
+   
   .mainButton button{
     margin: 0;
 
 }
+
+
   
   }
+  .qna{
+    margin-left: 1400px;
+    
+  }
+  #name-form {
+    margin-top: 20px;
+}
+
+#player-name[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    background: whitesmoke;
+    border: 2px solid #ffcc00;
+    border-radius: 55px;
+    margin-right: 650px; margin-bottom: 20px;
+    text-align: center;
+    width: 200px; 
+}
+@media(max-width:1000px){
+    
+    #player-name[type="text"]{
+        margin-right:0;
+    }
+}

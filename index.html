@@ -18,19 +18,37 @@
     <div class="mainButton">
          
         <p id="guessemm" >Guess 'em all !</p>
+        <form id="name-form"></form>
+            <input type="text" id="player-name" name="player-name" placeholder="Who's There?" required>
+            
+        </form>
         <a href="guess.html">
-            <button>Let's Go</button>
+            <button id="lets-go-button" >Let's Go</button>
         </a>
-   
+      
         
     
     </div>
+  
 
 
     <script src="pokemon.js"></script>
-    <audio src="Y2meta.app - Pokémon Anime Sound Collection - The Matter's Settled (128 kbps).mp3"  loop id="background-music" autoplay></audio> 
-   
-    
+    <audio src="Y2meta.app - Pokémon Anime Sound Collection - The Matter's Settled (128 kbps).mp3"  id="background-music" autoplay loop></audio> 
+ 
+    <script>
+         var playerNameInput = document.getElementById('player-name');
+         var letsGoButton = document.getElementById('lets-go-button');
+         var backgroundMusic = document.getElementById('background-music');
+         
+         letsGoButton.addEventListener('click', function(event) {
+            if (playerNameInput.value.trim() === '') {
+                event.preventDefault(); // Prevent the default action
+                alert('Please enter your name to begin!');
+            } else {
+                localStorage.setItem('playerName', playerNameInput.value.trim()); // Save the name to localStorage
+            }
+        });
+    </script>
 
     
 </body>

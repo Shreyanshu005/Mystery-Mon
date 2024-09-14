@@ -17,15 +17,15 @@
     <style>
         body {
            
-            /* background: url(a186a8aff83506c70b0b307e3fb062c8.png); */
             background-size: cover;
           
-            background-color: black;
+            background-color: white;
+            background: linear-gradient(to bottom right,#262626,#000000);
             display: flex;
             justify-content: center;
             align-items: center;
-            /* height: 100vh; */
             padding-top: 50px;
+         margin-bottom: 100px;
 
         }
         @font-face {
@@ -65,7 +65,6 @@
 
         .brightened {
             filter: brightness(1);
-            /* Brightened state */
         }
 
         .result input {
@@ -81,7 +80,6 @@
             border: 1px solid white;
             border-radius: 1000px;
             background-color: black;
-            /* box-shadow: 0 0 21px #03e9f4; */
         }
         .progress-bar-container {
     width: 50%;
@@ -120,7 +118,6 @@
             color: white;
             cursor: pointer;
             background-color: black;
-            /* border: 1px solid #03e9f4; */
             
 
     
@@ -184,8 +181,8 @@ z-index: -1;
 
             text-align: center;
             align-items: center;
-            height: 450px;
-            /* margin-bottom: 70px; */
+            height: fit-content;
+            min-height: 400px;
             
 
         }
@@ -212,7 +209,6 @@ z-index: -1;
 
         .loading {
             position: absolute;
-            /* margin-bottom: 300px; */
         }
 
         .loading img {
@@ -221,7 +217,6 @@ z-index: -1;
 
             filter: brightness(1);
             animation: rotate 1s linear infinite;
-            /* Add animation */
         }
 
         @keyframes rotate {
@@ -238,18 +233,16 @@ z-index: -1;
         transform: scale(1);
     }
     100% {
-        transform: scale(1);
+        transform: scale(1.2);
     }
 }
 
         #pokemon-image {
             display: none;
-            /* animation: animate 2s alternate infinite; */
         }
 
         .timer {
             
-            /* box-shadow: 0 0 21px #03e9f4; */
             border-radius: 100px;
             width: 75px;
             font-family: "Play", sans-serif;
@@ -262,7 +255,7 @@ z-index: -1;
             
     padding: 10px;
     transition: border 0.3s ease;
-    position: relative; /* Ensure the pseudo-element is positioned relative to the .info element */
+    position: relative;
 }
 
 .info.has-content {
@@ -270,9 +263,8 @@ z-index: -1;
     min-height: 200px;
     max-height: fit-content;
 width: 400px;
-    /* width: fit-content; */
-    /* max-width: 400px; */
-    box-shadow: 0 0 21px grey;
+ 
+    box-shadow: 0 0 10px grey;
 } 
 
 .info.has-content::after {
@@ -282,9 +274,9 @@ width: 400px;
     left: -2px;
     right: -2px;
     bottom: -2px;
-    border-radius: 10px; /* Adjust the border radius as needed */
+    border-radius: 10px; 
     background: linear-gradient(45deg, #008cff, #e100ff);
-    z-index: -1; /* Ensure the pseudo-element is behind the content */
+    z-index: -1;
 }
 .hidden {
     display: none;
@@ -314,10 +306,8 @@ width: 400px;
     font-weight: 700;
     font-style: normal;
     margin-top: 20px;
-    /* border: 0.5px solid grey; */
     border-radius: 10px;
     padding: 10px;
-    /* box-shadow: 0 0 21px #03e9f4; */
     transition: transform 0.2s; 
 }
 @media(max-width:900px){
@@ -341,13 +331,15 @@ width: 400px;
     }
     .boxImg{
         margin: 0;
+        min-height: 400px;
+        height: fit-content;
     }
     .loading{
-        margin-bottom: 300px;
+        margin-bottom: 500px;
     }
 }
 #guessPokemon::placeholder {
-    color: white; /* Change this to your desired color */
+    color: white; 
 }
 
 .who{
@@ -365,7 +357,7 @@ width: 400px;
   
     justify-content: center;
     align-items: center;
-    border-radius: 10px; /* Adjust the border radius as needed */
+    border-radius: 10px; 
     background: linear-gradient(45deg, #008cff, #e100ff);
     box-shadow: 0 0 11px grey;
     font-family: "Play", sans-serif;
@@ -384,6 +376,23 @@ width: 400px;
 
     color: white;
 }
+#welcome{
+    font-size: 30px;
+    font-family: "Play", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+}
+#pokemon-image::after{
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border-radius: 10px; 
+    background: linear-gradient(45deg, #008cff, #e100ff);
+    z-index: -1;
+}
 
 
  
@@ -398,6 +407,7 @@ width: 400px;
     </div>
 
     <div class="result">
+       <p id="welcome" style="color: white; text-align: center;">Welcome</p>
         <div class="timer" style="display: none;">
             <p id="timer-clock" style="color: white; text-align: center; font-size: 24px;">10</p>
         </div>
@@ -450,6 +460,15 @@ width: 400px;
 
 
     <script src="pokemon.js"></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var playerName = localStorage.getItem('playerName');
+            if (playerName) {
+                document.getElementById('welcome').innerText = 'Hey ! ' + playerName ;
+            }
+        });
+    </script>
 
 </body>
 
