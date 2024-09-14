@@ -249,6 +249,7 @@
 
         #pokemon-image {
             display: none;
+            margin: 20px;
         }
 
         .timer {
@@ -348,6 +349,10 @@
         }
 
         @media(max-width:900px) {
+            #correct {
+                margin: 0;
+            }
+
             body {
                 flex-direction: column;
                 /* padding-top: 120px; */
@@ -372,8 +377,8 @@
             }
 
             .boxImg {
-                margin: 0;
-                min-height: 400px;
+                margin-bottom: 0;
+                min-height: 300px;
                 height: fit-content;
             }
 
@@ -532,6 +537,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             var playerName = localStorage.getItem('playerName');
             if (playerName) {
+                playerName = playerName.charAt(0).toUpperCase() + playerName.slice(1);
                 document.getElementById('welcome').innerText = 'Hey ! ' + playerName;
             }
         });

@@ -26,7 +26,7 @@ async function getPokemon(num) {
 
     res = await fetch(pokemon["species"]["url"]);
     let pokemonDes = await res.json();
-    pokemonDes = pokemonDes["flavor_text_entries"][0]["flavor_text"];
+    pokemonDes = pokemonDes["flavor_text_entries"].find(entry => entry.language.name === 'en').flavor_text;
 
     pokedex[num] = {
         "name": pokemonName,
@@ -181,7 +181,7 @@ inputField.addEventListener('keydown', function (event) {
             incrementStreak();
         } else {
             document.getElementById('who').innerText = 'Oops! Try Again';
-            resetStreak();
+           
 
         }
     }
@@ -207,7 +207,7 @@ document.querySelector('.reveal').addEventListener('click', function () {
     document.querySelector('.progress-bar-container').style.display = 'none';
     document.querySelector('.reveal').style.display = 'none';
     document.getElementById('who').style.display = 'none';
-    document.querySelector('.boxImg').style.marginBottom = '70px';
+    // document.querySelector('.boxImg').style.marginBottom = '70px';
     document.querySelector('.link').style.display = 'flex';
     document.getElementById('welcome').style.display = 'none';
     const linkElement = document.getElementById('linkto');
