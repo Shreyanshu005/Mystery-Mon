@@ -18,8 +18,8 @@
         body {
            
             background-size: cover;
-          
-            background-color: white;
+          background-repeat: no-repeat;
+            background-color: black;
             background: linear-gradient(to bottom right,#262626,#000000);
             display: flex;
             justify-content: center;
@@ -87,6 +87,7 @@
     border-radius: 5px;
     overflow: hidden;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .progress-bar {
@@ -160,6 +161,7 @@ z-index: -1;
             font-family: "Play", sans-serif;
             font-weight: 700;
             font-style: normal;
+            max-width: 500px;
 
         }
 
@@ -313,7 +315,7 @@ width: 400px;
 @media(max-width:900px){
     body{
         flex-direction: column;
-        padding-top: 120px;
+        /* padding-top: 120px; */
     }
     .buttons{
         flex-direction: column;
@@ -337,6 +339,9 @@ width: 400px;
     .loading{
         margin-bottom: 500px;
     }
+    .info.has-content{
+        max-width: 18rem;
+    }
 }
 #guessPokemon::placeholder {
     color: white; 
@@ -346,6 +351,7 @@ width: 400px;
     color: white;
     font-family: 'pokemon_solidnormal';
     font-size: 50px;
+    text-align: center;
 }
 .link{
     display: none;

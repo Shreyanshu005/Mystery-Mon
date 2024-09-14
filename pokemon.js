@@ -158,7 +158,8 @@ inputField.addEventListener('keydown', function (event) {
             document.querySelector('.progress-bar-container').style.display = 'none';
             document.querySelector('.reveal').style.display = 'none';
         } else {
-            document.getElementById('correct').innerText = 'Oops! Try Again';
+            document.getElementById('who').innerText = 'Oops! Try Again';
+           
         }
     }
 });

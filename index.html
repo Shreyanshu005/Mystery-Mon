@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poke-Guess</title>
     <link rel="stylesheet" href="pokemon.css">
+    <head>
+        <link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css />
+        </head>
 </head>
 <body>
 
@@ -15,20 +18,37 @@
         <img src="pngegg (1).png" alt="">
         <p>Showdown</p>
     </div>
+    
+    <div class="musicButton">
+        <button id="playB"><i class="fa-solid fa-play fa-1.5x"></i></button> 
+    </div>
+        
+    
+   
+    
+  
     <div class="mainButton">
+        
          
         <p id="guessemm" >Guess 'em all !</p>
-        <form id="name-form"></form>
+        <form id="name-form">
             <input type="text" id="player-name" name="player-name" placeholder="Who's There?" required>
             
         </form>
         <a href="guess.html">
             <button id="lets-go-button" >Let's Go</button>
+            
+            
         </a>
+        
+     
       
         
     
     </div>
+   
+    
+   
   
 
 
@@ -39,6 +59,7 @@
          var playerNameInput = document.getElementById('player-name');
          var letsGoButton = document.getElementById('lets-go-button');
          var backgroundMusic = document.getElementById('background-music');
+         var playPauseButton = document.getElementById('playB');
          
          letsGoButton.addEventListener('click', function(event) {
             if (playerNameInput.value.trim() === '') {
@@ -46,6 +67,16 @@
                 alert('Please enter your name to begin!');
             } else {
                 localStorage.setItem('playerName', playerNameInput.value.trim()); // Save the name to localStorage
+            }
+        });
+        playPauseButton.addEventListener('click', function() {
+            if (backgroundMusic.paused) {
+                backgroundMusic.play();
+                document.getElementById('playB').innerHTML = '<i class="fa-solid fa-pause"></i>';
+               
+            } else {
+                backgroundMusic.pause();
+                document.getElementById('playB').innerHTML = '<i class="fa-solid fa-play"></i>';
             }
         });
     </script>

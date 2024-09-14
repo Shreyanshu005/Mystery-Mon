@@ -77,6 +77,10 @@ p{
     
 
 }
+.mainButton a{
+    width: 120px;
+    margin-right: 640px;
+}
 .mainButton text{
     margin-top: 500px;
 }
@@ -193,6 +197,7 @@ p{
     
     font-size: 2rem;
       }
+      
   }
   @media(min-width: 700px)and (max-width: 1000px){
    
@@ -202,6 +207,7 @@ p{
 }
 
 
+  
   
   }
   .qna{
@@ -217,7 +223,7 @@ p{
     font-size: 16px;
     background: whitesmoke;
     border: 2px solid #ffcc00;
-    border-radius: 55px;
+    border-radius: 5px;
     margin-right: 650px; margin-bottom: 20px;
     text-align: center;
     width: 200px; 
@@ -226,5 +232,39 @@ p{
     
     #player-name[type="text"]{
         margin-right:0;
+    }
+    .mainButton a{
+        margin: 0;
+    }
+}
+#playB{
+    z-index: 5;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background: #ffcc00;
+    border: 2px solid #ffcc00;
+    border-radius: 100px;
+ 
+   margin-right: 50px;
+    text-align: center;
+   
+    width: 60px;
+    height: 60px;
+   
+  
+}
+.musicButton{
+    
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+@media(max-width: 1000px){
+ #playB{
+    margin: 0;}
+    .musicButton{
+        justify-content: center;
     }
 }
