@@ -299,6 +299,7 @@ p {
 @media(max-width: 1000px) {
     #playB {
         margin: 0;
+        margin-top: 20px;
     }
 
     .musicButton {
