@@ -5,9 +5,7 @@ var naam;
 var guessTimer;
 var timerInterval;
 var isPaused = false;
-// var playerNameInput = document.getElementById('player-name');
-// var playerName = '';
-// playerName = playerNameInput.value.trim();
+
 window.onload = async function () {
     showLoadingScreen();
     await getPokemon(id);
@@ -25,7 +23,7 @@ async function getPokemon(num) {
     naam = pokemonName;
     let pokemonType = pokemon["types"].map(typeInfo => typeInfo.type.name).join(', ');
     let pokemonImage = pokemon["sprites"]["front_default"];
-    
+
     res = await fetch(pokemon["species"]["url"]);
     let pokemonDes = await res.json();
     pokemonDes = pokemonDes["flavor_text_entries"][0]["flavor_text"];
@@ -84,7 +82,8 @@ function startGuessTimer() {
                 linkElement.style.display = 'block';
                 linkElement.href = `https://pokepedia-graphql.netlify.app/pokemon/` + naam;
 
-                document.getElementById('welcome').style.display='none';
+                document.getElementById('welcome').style.display = 'none';
+                resetStreak();
             }
 
             if (elapsedTime % 1000 === 0) {
@@ -127,6 +126,28 @@ function typeText(element, text) {
     }, 100);
 }
 
+let currentStreak = localStorage.getItem('currentStreak') ? parseInt(localStorage.getItem('currentStreak')) : 0;
+    let highestStreak = localStorage.getItem('highestStreak') ? parseInt(localStorage.getItem('highestStreak')) : 0;
+    updateStreakDisplay(currentStreak, highestStreak);
+function updateStreakDisplay(currentStreak, highestStreak) {
+    document.getElementById('current-streak').innerText = 'Current Streak : ' + currentStreak;
+    document.getElementById('highest-streak').innerText = 'Highest Streak : ' + highestStreak;
+}
+
+function resetStreak() {
+    currentStreak = 0;
+    localStorage.setItem('currentStreak', currentStreak);
+    updateStreakDisplay(currentStreak, highestStreak);
+}
+function incrementStreak() {
+    currentStreak += 1;
+    if (currentStreak > highestStreak) {
+        highestStreak = currentStreak;
+        localStorage.setItem('highestStreak', highestStreak);
+    }
+    localStorage.setItem('currentStreak', currentStreak);
+    updateStreakDisplay(currentStreak, highestStreak);
+}
 
 const inputField = document.getElementById('guessPokemon');
 inputField.addEventListener('keydown', function (event) {
@@ -145,7 +166,7 @@ inputField.addEventListener('keydown', function (event) {
             linkElement.style.display = 'block';
             linkElement.href = `https://pokepedia-graphql.netlify.app/pokemon/` + naam;
 
-            document.getElementById('welcome').style.display='none';
+            document.getElementById('welcome').style.display = 'none';
             const infoDiv = document.querySelector('.info');
             if (pokedex[id].types && pokedex[id].description) {
                 infoDiv.classList.add('has-content');
@@ -157,12 +178,16 @@ inputField.addEventListener('keydown', function (event) {
             inputField.style.display = 'none';
             document.querySelector('.progress-bar-container').style.display = 'none';
             document.querySelector('.reveal').style.display = 'none';
+            incrementStreak();
         } else {
             document.getElementById('who').innerText = 'Oops! Try Again';
-           
+            resetStreak();
+
         }
     }
 });
+
+
 
 document.querySelector('.again').addEventListener('click', async function () {
     clearInterval(timerInterval);
@@ -184,13 +209,29 @@ document.querySelector('.reveal').addEventListener('click', function () {
     document.getElementById('who').style.display = 'none';
     document.querySelector('.boxImg').style.marginBottom = '70px';
     document.querySelector('.link').style.display = 'flex';
-    document.getElementById('welcome').style.display='none';
+    document.getElementById('welcome').style.display = 'none';
     const linkElement = document.getElementById('linkto');
     linkElement.style.display = 'block';
+    resetStreak();
     linkElement.href = `https://pokepedia-graphql.netlify.app/pokemon/` + naam;
 });
+
 
 document.querySelector('.pause').addEventListener('click', function () {
     isPaused = !isPaused;
     this.innerText = isPaused ? 'Resume' : 'Pause';
+});
+
+
+
+document.querySelector('.again').addEventListener('click', async function () {
+    clearInterval(timerInterval);
+    location.reload();
+
+    const infoDiv = document.querySelector('.info');
+    infoDiv.classList.remove('has-content');
+    document.querySelector('.reveal').disabled = true;
+
+    inputField.disabled = false;
+    inputField.style.display = 'block';
 });
