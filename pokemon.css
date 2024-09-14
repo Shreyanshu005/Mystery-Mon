@@ -78,6 +78,7 @@ p {
     position: relative;
     transition: transform 0.7s;
     margin-right: 650px;
+    min-width: 120px;
 
 
 
