@@ -160,7 +160,7 @@ function typeDescription(description) {
         if (index < description.length) {
             descriptionElement.innerText += description[index];
             index++;
-            setTimeout(displayNextLetter, 50); // Adjust the delay between letters as needed
+            setTimeout(displayNextLetter, 50); 
         }
     }
 
