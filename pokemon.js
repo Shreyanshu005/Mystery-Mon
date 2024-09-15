@@ -83,9 +83,7 @@ function startGuessTimer() {
                 linkElement.href = `https://pokepedia-graphql.netlify.app/pokemon/` + naam;
 
                 document.getElementById('welcome').style.display = 'none';
-                if (window.innerWidth < 1390) {
-                    document.querySelector('.streaks').style.marginLeft = '200px';
-                }
+                
                 resetStreak();
             }
 
@@ -208,9 +206,7 @@ inputField.addEventListener('keydown', function (event) {
                 spread: 70,
                 origin: { x:0,y: 0.9 },
               });
-            if (window.innerWidth < 1390) {
-                document.querySelector('.streaks').style.marginLeft = '200px';
-            }
+            
 
             document.querySelector('.link').style.display = 'flex';
             const linkElement = document.getElementById('linkto');
@@ -263,9 +259,7 @@ document.querySelector('.reveal').addEventListener('click', function () {
     document.getElementById('welcome').style.display = 'none';
     const linkElement = document.getElementById('linkto');
     linkElement.style.display = 'block';
-    if (window.innerWidth < 1390) {
-        document.querySelector('.streaks').style.marginLeft = '200px';
-    }
+    
     
     
     resetStreak();
