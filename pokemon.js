@@ -109,7 +109,8 @@ function revealPokemon() {
     if (pokedex[id].types && pokedex[id].description) {
         infoDiv.classList.add('has-content');
         typeText(document.getElementById('pokemon-type'), 'Type : ' + pokedex[id].types);
-        typeText(document.getElementById('pokemon-description'), 'Description : ' + pokedex[id].description);
+      
+        typeDescription('Description : ' + pokedex[id].description);
     }
 
     const inputField = document.getElementById('guessPokemon');
@@ -149,6 +150,25 @@ function incrementStreak() {
     updateStreakDisplay(currentStreak, highestStreak);
 }
 
+function typeDescription(description) {
+    const descriptionElement = document.getElementById('pokemon-description');
+    let index = 0;
+
+    descriptionElement.innerText = '';
+
+    function displayNextLetter() {
+        if (index < description.length) {
+            descriptionElement.innerText += description[index];
+            index++;
+            setTimeout(displayNextLetter, 50); // Adjust the delay between letters as needed
+        }
+    }
+
+    displayNextLetter();
+}
+
+
+
 const inputField = document.getElementById('guessPokemon');
 inputField.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
@@ -171,7 +191,7 @@ inputField.addEventListener('keydown', function (event) {
             if (pokedex[id].types && pokedex[id].description) {
                 infoDiv.classList.add('has-content');
                 typeText(document.getElementById('pokemon-type'), 'Type: ' + pokedex[id].types);
-                typeText(document.getElementById('pokemon-description'), 'Description: ' + pokedex[id].description);
+                typeDescription('Description : ' + pokedex[id].description);
             }
 
             inputField.disabled = true;
@@ -186,6 +206,7 @@ inputField.addEventListener('keydown', function (event) {
         }
     }
 });
+
 
 
 
@@ -207,11 +228,12 @@ document.querySelector('.reveal').addEventListener('click', function () {
     document.querySelector('.progress-bar-container').style.display = 'none';
     document.querySelector('.reveal').style.display = 'none';
     document.getElementById('who').style.display = 'none';
-    // document.querySelector('.boxImg').style.marginBottom = '70px';
     document.querySelector('.link').style.display = 'flex';
     document.getElementById('welcome').style.display = 'none';
     const linkElement = document.getElementById('linkto');
     linkElement.style.display = 'block';
+    
+    
     resetStreak();
     linkElement.href = `https://pokepedia-graphql.netlify.app/pokemon/` + naam;
 });

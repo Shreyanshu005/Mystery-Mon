@@ -212,6 +212,7 @@
             font-family: "Play", sans-serif;
             font-weight: 700;
             font-style: normal;
+            white-space: pre-wrap; 
 
         }
 
@@ -275,8 +276,10 @@
             min-height: 200px;
             max-height: fit-content;
             width: 400px;
-
+            word-break: break-word;
             box-shadow: 0 0 10px grey;
+            white-space: normal;
+            overflow-wrap:break-word;
         }
 
         .info.has-content::after {
@@ -348,13 +351,17 @@
             font-style: normal;
         }
 
-        @media(max-width:900px) {
+        @media(max-width:1020px) {
+            body{
+                margin: 0;
+            }
             #correct {
                 margin: 0;
             }
 
             body {
                 flex-direction: column;
+                margin: 0;
                 /* padding-top: 120px; */
             }
 
@@ -384,10 +391,12 @@
 
             .loading {
                 margin-bottom: 500px;
+                margin-left: 0;
             }
 
             .info.has-content {
                 max-width: 18rem;
+                
             }
 
             .streaks {
@@ -462,7 +471,46 @@
             background: linear-gradient(45deg, #008cff, #e100ff);
             z-index: -1;
         }
-    </style>
+        @media(max-width:1390px){
+            body{
+                margin-right: 200px;
+            }
+            .streaks {
+                margin: 0;
+        position: static;
+        align-self: center;
+        justify-self: center;
+        min-width: 200px;
+        
+    }
+    #correct{
+        max-width:300px
+    }
+    .loading{
+        margin-left: 15rem;
+    }
+        }
+        @media(max-width:1020px) {
+            body {
+                padding-bottom: 50px;
+                margin: 0;
+                flex-direction: column;
+            }
+
+            #correct {
+                margin: 0;
+            }
+
+            .loading {
+                margin-left: 0;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+        }
+        
+         </style>
 </head>
 
 <body>
@@ -528,7 +576,7 @@
 
 
     </div>
-
+ 
 
 
     <script src="pokemon.js"></script>
@@ -541,6 +589,28 @@
                 document.getElementById('welcome').innerText = 'Hey ! ' + playerName;
             }
         });
+        document.querySelector('.reveal').addEventListener('click', function () {
+                document.body.style.marginRight = '0';
+            });
+ 
+         
+
+
+            const imgElement = document.getElementById('pokemon-image');
+            const timeout = setTimeout(function () {
+                if (!imgElement.complete || imgElement.naturalWidth === 0) {
+                    alert('It is taking longer than expected. Please check your internet connection!');
+                }
+            }, 10000);
+
+            // Clear the timeout if the image loads successfully
+            imgElement.onload = function () {
+                clearTimeout(timeout);
+            };
+        
+           
+
+        
 
 
     </script>
