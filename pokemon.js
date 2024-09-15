@@ -83,6 +83,9 @@ function startGuessTimer() {
                 linkElement.href = `https://pokepedia-graphql.netlify.app/pokemon/` + naam;
 
                 document.getElementById('welcome').style.display = 'none';
+                if (window.innerWidth < 1390) {
+                    document.querySelector('.streaks').style.marginLeft = '200px';
+                }
                 resetStreak();
             }
 
@@ -129,10 +132,12 @@ function typeText(element, text) {
 
 let currentStreak = localStorage.getItem('currentStreak') ? parseInt(localStorage.getItem('currentStreak')) : 0;
     let highestStreak = localStorage.getItem('highestStreak') ? parseInt(localStorage.getItem('highestStreak')) : 0;
+    let badgeText = localStorage.getItem('badgeText') || 'Badge : Trainer';
     updateStreakDisplay(currentStreak, highestStreak);
 function updateStreakDisplay(currentStreak, highestStreak) {
     document.getElementById('current-streak').innerText = 'Current Streak : ' + currentStreak;
     document.getElementById('highest-streak').innerText = 'Highest Streak : ' + highestStreak;
+    document.getElementById('Badge').innerText = badgeText;
 }
 
 function resetStreak() {
@@ -147,7 +152,19 @@ function incrementStreak() {
         localStorage.setItem('highestStreak', highestStreak);
     }
     localStorage.setItem('currentStreak', currentStreak);
-    updateStreakDisplay(currentStreak, highestStreak);
+    updateStreakDisplay(currentStreak, highestStreak, badgeText);
+
+    // Check if the highest streak reaches 50
+    if (highestStreak >= 2) {
+        badgeText = 'Badge : Ace';
+        localStorage.setItem('badgeText', badgeText);
+        document.getElementById('Badge').innerText = badgeText;
+    }
+    if (highestStreak >= 3) {
+        badgeText = 'Badge : Master';
+        localStorage.setItem('badgeText', badgeText);
+        document.getElementById('Badge').innerText = badgeText;
+    }
 }
 
 function typeDescription(description) {
@@ -181,6 +198,20 @@ inputField.addEventListener('keydown', function (event) {
             document.getElementById('correct').innerText = 'You nailed it ! The Pokémon is ' + naam;
             document.getElementById('who').style.display = 'none';
             document.querySelector('.boxImg').style.marginBottom = '70px';
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { x:1,y: 0.9 },
+              });
+              confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { x:0,y: 0.9 },
+              });
+            if (window.innerWidth < 1390) {
+                document.querySelector('.streaks').style.marginLeft = '200px';
+            }
+
             document.querySelector('.link').style.display = 'flex';
             const linkElement = document.getElementById('linkto');
             linkElement.style.display = 'block';
@@ -232,6 +263,9 @@ document.querySelector('.reveal').addEventListener('click', function () {
     document.getElementById('welcome').style.display = 'none';
     const linkElement = document.getElementById('linkto');
     linkElement.style.display = 'block';
+    if (window.innerWidth < 1390) {
+        document.querySelector('.streaks').style.marginLeft = '200px';
+    }
     
     
     resetStreak();

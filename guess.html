@@ -213,7 +213,6 @@
             font-weight: 700;
             font-style: normal;
             white-space: pre-wrap; 
-            text-align:center;
 
         }
 
@@ -350,6 +349,7 @@
             font-family: "Play", sans-serif;
             font-weight: 700;
             font-style: normal;
+            /* margin-left: 200px; */
         }
 
         @media(max-width:1020px) {
@@ -518,6 +518,7 @@
     <div class="streaks">
         <p id="current-streak" style="color: white; text-align: center;">Current Streak : 0</p>
         <p id="highest-streak" style="color: white; text-align: center;">Highest Streak : 0</p>
+        <p id="Badge" style="color: white; text-align: center;">Badge : Trainer</p>
     </div>
     <div class="loading" id="loading-screen">
 
@@ -581,6 +582,7 @@
 
 
     <script src="pokemon.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
     <script>
 
         document.addEventListener('DOMContentLoaded', function () {
