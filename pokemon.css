@@ -129,6 +129,7 @@ p {
     left: 45%;
 
     transform: translate(-50%, -50%);
+    /* z-index: -1; */
 
 }
 
@@ -260,7 +261,9 @@ p {
 }
 
 @media(max-width:1000px) {
-
+#playB{
+    position: static;
+}
     #player-name[type="text"] {
         margin-right: 0;
     }
@@ -271,6 +274,7 @@ p {
 }
 
 #playB {
+    position: fixed;
     z-index: 5;
     padding: 10px 20px;
     font-size: 16px;
@@ -296,18 +300,56 @@ p {
     align-items: flex-end;
 }
 
-@media(max-width: 1000px) {
-    #playB {
-        margin: 0;
-        margin-top: 20px;
-    }
-
-    .musicButton {
-        justify-content: center;
-    }
-}
 
 #player-name[type="text"]::placeholder {
     color: grey;
     
+}
+.how{
+    display: flex;
+}
+.musicButton a{
+    position: absolute;
+    left: 10%;
+}
+.musicButton a button {
+    z-index: 6;
+    background-color: #ffcc00;
+    
+    border: none;
+    color: black; 
+    padding: 15px 32px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px; 
+    cursor: pointer; 
+    border-radius: 100px; 
+    transition: transform 0.3s; 
+    
+}
+
+.musicButton a button:hover {
+    transform: scale(1.1); 
+    box-shadow: 1px 1px 22px #e3d395; 
+}
+#howToPlayBtn{
+    position: fixed;
+    right: 3%;
+    bottom: 10%;
+}
+@media(max-width: 1000px) {
+    #playB {
+        margin: 0;
+        margin-top: 20px;
+        position: static;
+    }
+
+    .musicButton {
+        justify-content: center;
+    }#howToPlayBtn{
+        
+        bottom: 2%;
+    }
 }

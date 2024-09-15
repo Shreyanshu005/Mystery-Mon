@@ -152,13 +152,13 @@ function incrementStreak() {
     localStorage.setItem('currentStreak', currentStreak);
     updateStreakDisplay(currentStreak, highestStreak, badgeText);
 
-    // Check if the highest streak reaches 50
-    if (highestStreak >= 2) {
+    
+    if (highestStreak >= 50) {
         badgeText = 'Badge : Ace';
         localStorage.setItem('badgeText', badgeText);
         document.getElementById('Badge').innerText = badgeText;
     }
-    if (highestStreak >= 3) {
+    if (highestStreak >= 100) {
         badgeText = 'Badge : Master';
         localStorage.setItem('badgeText', badgeText);
         document.getElementById('Badge').innerText = badgeText;

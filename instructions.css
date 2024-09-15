@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color:black;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.instructions {
+    position: relative;
+    background-color: #ffcc00;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px;
+    
+    max-width: 600px;
+    width: 100%;
+    animation: animate 2s alternate infinite;
+
+
+}
+
+.instructions h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.instructions ol {
+    padding-left: 20px;
+}
+
+.instructions li {
+    margin-bottom: 10px;
+    color: #555;
+    font-size: 16px;
+}
+@keyframes animate {
+    from {
+        bottom: 0;
+    }
+
+    to {
+        bottom: 20px;
+    }
+}
+#goBackBtn {
+    background-color: #ffcc00; 
+    border: none; 
+    color: black; 
+    padding: 10px 20px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px;
+    margin-top: 20px; 
+    cursor: pointer; 
+    border-radius: 100px; 
+    transition: background-color 0.3s, transform 0.3s; 
+}
+
+#goBackBtn:hover {
+    background-color: #bb9602; 
+    transform: scale(1.1); 
+}
+
+
+@media (max-width: 768px) {
+    .instructions {
+        padding: 15px; 
+        max-width: 90%; 
+    }
+
+    .instructions h2 {
+        font-size: 20px; 
+    }
+
+    .instructions li {
+        font-size: 14px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .instructions {
+        padding: 10px; 
+        max-width: 95%; 
+    }
+
+    .instructions h2 {
+        font-size: 18px; 
+    }
+
+    .instructions li {
+        font-size: 12px; 
+    }
+}
