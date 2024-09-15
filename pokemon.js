@@ -1,4 +1,4 @@
-const pokemonCount = 1025;
+const pokemonCount = 10;
 var pokedex = {};
 var id = Math.floor((Math.random() * pokemonCount) + 1);
 var naam;
