@@ -1,4 +1,4 @@
-const pokemonCount = 10;
+const pokemonCount = 1025;
 var pokedex = {};
 var id = Math.floor((Math.random() * pokemonCount) + 1);
 var naam;
@@ -83,7 +83,7 @@ function startGuessTimer() {
                 linkElement.href = `https://pokepedia-graphql.netlify.app/pokemon/` + naam;
 
                 document.getElementById('welcome').style.display = 'none';
-                
+
                 resetStreak();
             }
 
@@ -110,7 +110,7 @@ function revealPokemon() {
     if (pokedex[id].types && pokedex[id].description) {
         infoDiv.classList.add('has-content');
         typeText(document.getElementById('pokemon-type'), 'Type : ' + pokedex[id].types);
-      
+
         typeDescription('Description : ' + pokedex[id].description);
     }
 
@@ -129,14 +129,15 @@ function typeText(element, text) {
 }
 
 let currentStreak = localStorage.getItem('currentStreak') ? parseInt(localStorage.getItem('currentStreak')) : 0;
-    let highestStreak = localStorage.getItem('highestStreak') ? parseInt(localStorage.getItem('highestStreak')) : 0;
-    let badgeText = localStorage.getItem('badgeText') || 'Badge : Trainer';
-    updateStreakDisplay(currentStreak, highestStreak);
+let highestStreak = localStorage.getItem('highestStreak') ? parseInt(localStorage.getItem('highestStreak')) : 0;
+let badgeText = localStorage.getItem('badgeText') || 'Badge : Trainer';
+updateStreakDisplay(currentStreak, highestStreak);
 function updateStreakDisplay(currentStreak, highestStreak) {
     document.getElementById('current-streak').innerText = 'Current Streak : ' + currentStreak;
     document.getElementById('highest-streak').innerText = 'Highest Streak : ' + highestStreak;
     document.getElementById('Badge').innerText = badgeText;
 }
+
 
 function resetStreak() {
     currentStreak = 0;
@@ -152,7 +153,7 @@ function incrementStreak() {
     localStorage.setItem('currentStreak', currentStreak);
     updateStreakDisplay(currentStreak, highestStreak, badgeText);
 
-    
+
     if (highestStreak >= 50) {
         badgeText = 'Badge : Ace';
         localStorage.setItem('badgeText', badgeText);
@@ -175,7 +176,7 @@ function typeDescription(description) {
         if (index < description.length) {
             descriptionElement.innerText += description[index];
             index++;
-            setTimeout(displayNextLetter, 50); 
+            setTimeout(displayNextLetter, 50);
         }
     }
 
@@ -199,14 +200,14 @@ inputField.addEventListener('keydown', function (event) {
             confetti({
                 particleCount: 100,
                 spread: 70,
-                origin: { x:1,y: 0.9 },
-              });
-              confetti({
+                origin: { x: 1, y: 0.9 },
+            });
+            confetti({
                 particleCount: 100,
                 spread: 70,
-                origin: { x:0,y: 0.9 },
-              });
-            
+                origin: { x: 0, y: 0.9 },
+            });
+
 
             document.querySelector('.link').style.display = 'flex';
             const linkElement = document.getElementById('linkto');
@@ -228,7 +229,7 @@ inputField.addEventListener('keydown', function (event) {
             incrementStreak();
         } else {
             document.getElementById('who').innerText = 'Oops! Try Again';
-           
+
 
         }
     }
@@ -259,9 +260,9 @@ document.querySelector('.reveal').addEventListener('click', function () {
     document.getElementById('welcome').style.display = 'none';
     const linkElement = document.getElementById('linkto');
     linkElement.style.display = 'block';
-    
-    
-    
+
+
+
     resetStreak();
     linkElement.href = `https://pokepedia-graphql.netlify.app/pokemon/` + naam;
 });
