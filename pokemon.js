@@ -22,7 +22,8 @@ async function getPokemon(num) {
     let pokemonName = pokemon["name"];
     naam = pokemonName;
     let pokemonType = pokemon["types"].map(typeInfo => typeInfo.type.name).join(', ');
-    let pokemonImage = pokemon["sprites"]["front_default"];
+       let pokemonImage = pokemon["sprites"]["other"]["official-artwork"]["front_default"];
+
 
     res = await fetch(pokemon["species"]["url"]);
     let pokemonDes = await res.json();
